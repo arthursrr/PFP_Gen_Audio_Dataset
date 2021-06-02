@@ -1,0 +1,28 @@
+{
+  "name": "pfp_gen_audio_dataset",
+  "version": "1.0.0",
+  "description": "\"Gerador e visualizador de datasets para a tarefa de audio inpainting\"",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthursrr/PFP_Gen_Audio_Dataset.git"
+  },
+  "keywords": [
+    "\"Audio",
+    "Inpainting",
+    "Dataset",
+    "Visualizador\""
+  ],
+  "author": "Arthur Serra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arthursrr/PFP_Gen_Audio_Dataset/issues"
+  },
+  "homepage": "https://github.com/arthursrr/PFP_Gen_Audio_Dataset#readme",
+  "devDependencies": {
+    "electron": "^13.0.1"
+  }
+}
