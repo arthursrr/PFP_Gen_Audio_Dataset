@@ -1,0 +1,52 @@
+@import url("global.css");
+
+.destaque{
+    background: rgba(0, 0, 0, 1);
+}
+
+.h3{
+    font-family: Geomanist;
+    font-style: normal;
+    color: #4ACA4E;
+}
+
+.h6{
+    font-family: Geomanist;
+    color: #4ACA4E;
+}
+
+.navbar-brand{
+    text-align: center;
+    color: #4ACA4E;
+}
+
+.bg{
+    border-bottom-color:slategray;
+    border-bottom-style: solid;
+}
+
+.btn-success{
+    background-color: #4ACA4E;
+    font-family: Geomanist;
+    font-style: normal;
+}
+
+.container{
+    padding: 0;
+}
+
+.label{
+    color: white;
+    font-weight: 120;
+}
+
+.value{
+    font-family: Geomanist;
+    font-style: normal;
+    color: white;
+}
+
+.itm{
+    position: fixed;
+    bottom: 10px;
+}
