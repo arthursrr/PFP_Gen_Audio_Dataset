@@ -1,0 +1,25 @@
+/* Bootstrap CSS */
+@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
+@import url("global.css");   
+
+
+#init, .row, .container{
+    height: 100%;
+}
+
+.col{
+    display: block;
+}
+
+.card{
+    background: rgba(255, 255, 255, 0.05);
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img_dragdrop{
+    width: 25px;
+    height: 25px;
+}

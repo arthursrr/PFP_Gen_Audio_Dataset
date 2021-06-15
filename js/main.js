@@ -5,15 +5,15 @@ const path = require('path')
 function createWindow () {
   // Cria a janela de navegador.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 720,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
   })
 
   // carregar o index.html do aplicativo.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('html/home.html')
 }
 
 // Este método sera chamado quando o Electron tiver terminado

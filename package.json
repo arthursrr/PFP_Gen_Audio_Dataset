@@ -2,7 +2,7 @@
   "name": "pfp_gen_audio_dataset",
   "version": "1.0.0",
   "description": "\"Gerador e visualizador de datasets para a tarefa de audio inpainting\"",
-  "main": "main.js",
+  "main": "js/main.js",
   "scripts": {
     "start": "electron ."
   },
@@ -24,5 +24,9 @@
   "homepage": "https://github.com/arthursrr/PFP_Gen_Audio_Dataset#readme",
   "devDependencies": {
     "electron": "^13.0.1"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "bootstrap": "^5.0.1"
   }
 }
