@@ -4,7 +4,7 @@ document.addEventListener('drop', (event) => {
   
     for (const f of event.dataTransfer.files) {
         // Using the path attribute to get absolute file path
-        console.log('File Path of dragged files: ', f)
+        console.log('File Path of dragged files: ', f.path)
       }
 });
   

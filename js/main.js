@@ -1,5 +1,5 @@
 // Modulos para controlar a vida util da aplicacao e criar uma janela de navegador nativo
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow} = require('electron')
 const path = require('path')
 
 function createWindow () {
@@ -10,9 +10,11 @@ function createWindow () {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
+    
   })
 
   // carregar o index.html do aplicativo.
+  mainWindow.webContents.openDevTools()
   mainWindow.loadFile('html/home.html')
 }
 
