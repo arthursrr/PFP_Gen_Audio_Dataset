@@ -17,3 +17,9 @@
     justify-content: center;
     align-items: center;
 }
+
+.btn-success{
+    background-color: #4ACA4E;
+    font-family: Geomanist;
+    font-style: normal;
+}

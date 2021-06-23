@@ -1,8 +1,7 @@
 // Todas as APIs do Node.js estão disponíveis no processo de preload.
 // Tem a mesma sandbox como uma extencao do Chrome.
 const { contextBridge, ipcRenderer } = require('electron')
-const path = require('path')
-var log = require('electron-log');
+const fs = require('fs')
 
 window.addEventListener('DOMContentLoaded', () => {
     const replaceText = (selector, text) => {
@@ -15,8 +14,22 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-contextBridge.exposeInMainWorld('electron', {
-  startDrag: (fileName) => {
-    ipcRenderer.send('ondragstart', path.join(process.cwd(), fileName))
+contextBridge.exposeInMainWorld(
+    "api", {
+        send: (channel, data) => {
+                ipcRenderer.send(channel, data);
+
+        },
+        receive: (channel, func) => {
+                ipcRenderer.on(channel, (event, ...args) => func(...args));
+        }
+    }
+);
+
+contextBridge.exposeInMainWorld(
+  "fs", {
+      isDir: (arg) => {
+        return fs.lstatSync(arg).isDirectory();          
+      }
   }
-})
+);

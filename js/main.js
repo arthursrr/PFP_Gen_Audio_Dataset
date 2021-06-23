@@ -1,6 +1,8 @@
 // Modulos para controlar a vida util da aplicacao e criar uma janela de navegador nativo
-const { app, BrowserWindow} = require('electron')
-const path = require('path')
+const { app, BrowserWindow, ipcMain} = require('electron')
+
+var path_dir = null
+var list_files = null
 
 function createWindow () {
   // Cria a janela de navegador.
@@ -8,14 +10,14 @@ function createWindow () {
     width: 1280,
     height: 720,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
-    
+      nodeIntegration: true,
+      contextIsolation: false
+      //preload: path.join(__dirname, 'preload.js')
+    }  
   })
-
   // carregar o index.html do aplicativo.
+  mainWindow.loadFile('./html/home.html')
   mainWindow.webContents.openDevTools()
-  mainWindow.loadFile('html/home.html')
 }
 
 // Este método sera chamado quando o Electron tiver terminado
@@ -23,7 +25,6 @@ function createWindow () {
 // Algumas APIs podem ser usadas somente depois que este evento ocorre.
 app.whenReady().then(() => {
   createWindow()
-
   app.on('activate', function () {
     // Em macOS é comum recriar uma janela no aplicativo quando o ícone da doca é clicado e não há outras janelas abertas.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -36,5 +37,11 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit()
 })
 
-// Neste arquivo voce pode incluir o resto do codigo principal especifico do seu aplicativo.
-// Voce também pode colocar eles em arquivos separados e requeridos-as aqui.
+ipcMain.on("toMain", (event, args) => {
+  path_dir = args[0]
+  list_files = args[1]
+});
+
+ipcMain.on("fromMain", (event, args) => {
+  event.returnValue = [path_dir, list_files]
+});

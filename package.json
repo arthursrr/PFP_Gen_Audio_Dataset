@@ -28,6 +28,10 @@
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "bootstrap": "^5.0.1",
+    "electron-store": "^8.0.0",
+    "glob": "^7.1.7",
+    "jquery": "^3.6.0",
+    "music-metadata": "^7.8.6",
     "wavesurfer.js": "^5.0.1"
   }
 }
