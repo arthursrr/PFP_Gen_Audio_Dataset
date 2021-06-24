@@ -84,8 +84,10 @@ async function chanegValues(){
 
 }
 
+var currentTrack = 0;
+
 function player(links){
-    let currentTrack = 0;
+    currentTrack = 0
     // Load a track by index and highlight the corresponding link
     let setCurrentSong = function(index) {
         links[currentTrack].classList.remove('active');
@@ -132,6 +134,7 @@ window.onload = function () {
 document.getElementById("btnVoltar").addEventListener("click", function(){ 
     window.location.replace("../html/home.html"); 
 });
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
