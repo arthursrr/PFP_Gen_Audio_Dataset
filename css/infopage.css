@@ -50,3 +50,19 @@
     position: fixed;
     bottom: 10px;
 }
+
+.list-group-item{
+    background-color: #444444;
+    font-family: Geomanist;
+    font-style: normal;
+    color: #4ACA4E;
+}
+
+#duracao{
+    text-align: center;
+}
+
+.list-group-item.active{
+    background-color: #4ACA4E;
+    color: #444444;
+}

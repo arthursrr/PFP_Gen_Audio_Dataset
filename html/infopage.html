@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval';">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval'; img-src 'self' 'unsafe-eval';">
 		<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self';">
 
 		<!-- CSS -->
@@ -19,32 +19,26 @@
 					<div class="col-9 d-flex flex-column">
                         <nav class="navbar bg">
                             <div class="container-fluid">
-                              <a class="navbar-brand" href="#">
+                              <a class="navbar-brand" id="btnVoltar">
                                 <img src="../assets/arrow-left.svg" alt="home" width="30" height="24" class="d-inline-block align-text-middle">
                                 Voltar
                               </a>
                             </div>
-                        </nav> 
-                        <div class="d-flex flex-column justify-content-center playlist">
-                            <div class="d-flex justify-content-center mt-3">
-                                A
-                            </div>
-                            <div class="d-flex justify-content-center mt-3">
-                                B
-                            </div>
-                            <div class="d-flex justify-content-center mt-3">
-                                C
-                            </div>
+                        </nav>
+                        <div class="d-flex flex-column justify-content-center mt-3 mb-3" id="waveform"></div> 
+                        <div class="d-flex flex-column justify-content-center mb-3" id="playlist" >
+                            <!-- Audios -->           
+
                         </div>
                         <div class="d-flex justify-content-center mt-auto mb-3">
                             <div class="destaque">
-                                <button class="btn" type="button">
+                                <button class="btn" type="button" id="prev">
                                     <img src="../assets/arrow-left.svg" alt="home" width="30" height="24" class="d-inline-block align-text-middle">
                                 </button>
                             </div> 
-                            <div class="p-2 destaque label">1/10</div> 
+                            <div class="p-2 destaque label npage"></div> 
                             <div class="destaque">
-                                <button class="btn" type="button">
+                                <button class="btn" type="button" id="next">
                                     <img src="../assets/arrow-right.svg" alt="home" width="30" height="24" class="d-inline-block align-text-middle">
                                 </button>
                             </div>                      
