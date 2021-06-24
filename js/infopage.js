@@ -279,4 +279,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
     });
 
+    let avancar = document.getElementById("avancar");
+    avancar.addEventListener('click', function(e) {
+        window.location.replace("../html/fragpage.html");
+    });
 });
