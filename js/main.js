@@ -1,8 +1,9 @@
 // Modulos para controlar a vida util da aplicacao e criar uma janela de navegador nativo
-const { app, BrowserWindow, ipcMain} = require('electron')
+const { app, BrowserWindow, ipcMain, dialog} = require('electron')
 
-var path_dir = null
-var list_files = null
+var path_dir = null;
+var list_files = null;
+var save_dir = null;
 
 function createWindow () {
   // Cria a janela de navegador.
@@ -11,7 +12,8 @@ function createWindow () {
     height: 720,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
+      enableRemoteModule: true
       //preload: path.join(__dirname, 'preload.js')
     }  
   })
@@ -45,3 +47,10 @@ ipcMain.on("toMain", (event, args) => {
 ipcMain.on("fromMain", (event, args) => {
   event.returnValue = [path_dir, list_files]
 });
+
+ipcMain.on('show-open-dialog', (event, arg)=> {
+  save_dir = dialog.showOpenDialogSync({
+    properties: ['openDirectory'],
+  });
+  event.returnValue = save_dir
+})

@@ -61,7 +61,7 @@ def griffin_lim(S, frame_length=256, fft_length=255, stride=64):
     
     return waveform
 
-def fragment_spectrogram(audio_dir, save_dir, frag_range = [0.1, 0.7], rate=16000, duration=30 ,frame_length=256, fft_length=255, stride=64, subtype='PCM_16'):
+def fragment_spectrogram(audio_dir, save_dir, frag_range = [0.1, 0.7], rate=16000, duration=30 ,frame_length=256, fft_length=255, stride=64, subtype='PCM_16', spec=False):
     '''
     Esta função recebe o path da base de audio WAV produz a fragmentação e salva os audio novos num path tambem informado.
     Esse processo sem auxilio de GPU pode levar algum tempo.
@@ -73,8 +73,9 @@ def fragment_spectrogram(audio_dir, save_dir, frag_range = [0.1, 0.7], rate=1600
         rate: Numero de quadros por segundo do audio
         duration: Duração do audio em segundos
         frame_length: Largura da janela que percorrera o audio
-        fft_length: tamanho do FFT para cada janela 
-        stride: tamanho dos saltos
+        fft_length: Tamanho do FFT para cada janela 
+        stride: Tamanho dos saltos
+        spec: Dados sarão salvos na forma de espetrongrama (.npy)
     [RETUNR]
         tensor format: waveform
     '''
@@ -127,10 +128,13 @@ def fragment_spectrogram(audio_dir, save_dir, frag_range = [0.1, 0.7], rate=1600
                 i_patch += 1
             data_spec = np.reshape(data_spec, (n_times-(n_times%n_freq), n_freq))
             
-            #transformando spectrograma para onda
-            wave = griffin_lim(data_spec, frame_length=frame_length, fft_length=fft_length, stride=stride)
-            
-            #salva audio fragmentado
-            sf.write(save_dir+'/'+os.path.basename(i), wave, rate, subtype=subtype)
+            if spec:
+                np.save(save_dir+"/"+os.path.basename(i).split('.')[0]+'.npy', data_spec)
+            else:
+                #transformando spectrograma para onda
+                wave = griffin_lim(data_spec, frame_length=frame_length, fft_length=fft_length, stride=stride)
+                
+                #salva audio fragmentado
+                sf.write(save_dir+'/'+os.path.basename(i), wave, rate, subtype=subtype)
         return True
     return False

@@ -84,6 +84,9 @@ async function chanegValues(){
 
 }
 
+var pause_icon = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pause-fill" viewBox="0 0 15 15"><path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/></svg>';
+var play_icon = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 15 15"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/></svg>';
+
 var currentTrack = 0;
 
 function player(links){
@@ -91,10 +94,10 @@ function player(links){
     // Load a track by index and highlight the corresponding link
     let setCurrentSong = function(index) {
         links[currentTrack].classList.remove('active');
-        links[currentTrack].childNodes[1].innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 15 15"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/></svg>';
+        links[currentTrack].childNodes[1].innerHTML = play_icon;
         currentTrack = index;
         links[currentTrack].classList.add('active');
-        links[currentTrack].childNodes[1].innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pause-fill" viewBox="0 0 15 15"><path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/></svg>';
+        links[currentTrack].childNodes[1].innerHTML = pause_icon;
         wavesurfer.load(links[currentTrack].attributes.href.nodeValue);
     };
 
@@ -106,11 +109,11 @@ function player(links){
             if (links[index].classList.contains('active')) {
                 if (links[index].classList.contains('pause')) {
                     wavesurfer.play();
-                    links[index].childNodes[1].innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pause-fill" viewBox="0 0 15 15"><path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/></svg>';
+                    links[index].childNodes[1].innerHTML = pause_icon;
                     links[index].classList.remove('pause');
                 } else {
                     wavesurfer.pause();
-                    links[index].childNodes[1].innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 15 15"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/></svg>';
+                    links[index].childNodes[1].innerHTML = play_icon;
                     links[index].classList.add('pause');
                 }
                             
@@ -167,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
             $('#playlist').append('<div class="list-group-item list-group-item-action audio d-flex" id=audio'+
             index+' href='+list_files[index]+
             '> <div class="col-1" id="icone">'+
-            '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 15 15"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/></svg>'+
+            play_icon+
             '</div> <div class="col-9" id="nome">'+
             path.parse(list_files[index]).name+
             '</div><div id="duracao" class="col-2 duracao'+index+'"></div></div>');
@@ -181,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
             $('#playlist').append('<div class="list-group-item list-group-item-action audio d-flex" id=audio'+
             index+' href='+list_files[index]+
             '> <div class="col-1" id="icone">'+
-            '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 15 15"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/></svg>'+
+            play_icon+
             ' </div> <div class="col-9" id="nome">'
             +path.parse(list_files[index]).name+
             '</div><div id="duracao" class="col-2 duracao'+index+'"></div></div>');
@@ -191,11 +194,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // The playlist links
-    let links = document.querySelectorAll('.audio');  
+    let links = document.querySelectorAll('.audio');
+
     player(links);
 
-    // Play on audio load
-    wavesurfer.on('ready', function() {
+    wavesurfer.on('ready', function(e) {
         wavesurfer.play();
     });
 
@@ -207,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
     wavesurfer.on('finish', function() {
         links[currentTrack].classList.remove('active');
         links[currentTrack].classList.remove('pause')
-        links[currentTrack].childNodes[1].innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 15 15"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/></svg>';
+        links[currentTrack].childNodes[1].innerHTML = play_icon;
     });
 
     
@@ -235,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 $('#playlist').append('<div class="list-group-item list-group-item-action audio d-flex" id=audio'+
                 index+' href='+currentAudio[index]+
                 '> <div class="col-1" id="icone">'+
-                '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 15 15"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/></svg>'+
+                play_icon+
                 '</div> <div class="col-9" id="nome">'+
                 path.parse(currentAudio[index]).name+
                 '</div><div id="duracao" class="col-2 duracao'+index+'"></div></div>');
@@ -269,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 $('#playlist').append('<div class="list-group-item list-group-item-action audio d-flex" id=audio'+
                 index+' href='+currentAudio[index]+
                 '> <div class="col-1" id="icone">'+
-                '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 15 15"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/></svg>'+
+                play_icon+
                 '</div> <div class="col-9" id="nome">'+
                 path.parse(currentAudio[index]).name+
                 '</div><div id="duracao" class="col-2 duracao'+index+'"></div></div>');
