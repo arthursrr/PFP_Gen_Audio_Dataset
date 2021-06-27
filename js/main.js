@@ -1,5 +1,6 @@
 // Modulos para controlar a vida util da aplicacao e criar uma janela de navegador nativo
 const { app, BrowserWindow, ipcMain, dialog} = require('electron')
+const fs = require('fs')
 
 var path_dir = null;
 var list_files = null;
@@ -40,8 +41,8 @@ app.on('window-all-closed', function () {
 })
 
 ipcMain.on("toMain", (event, args) => {
-  path_dir = args[0]
-  list_files = args[1]
+    path_dir = args[0]
+    list_files = args[1]
 });
 
 ipcMain.on("fromMain", (event, args) => {

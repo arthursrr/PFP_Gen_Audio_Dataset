@@ -13,8 +13,8 @@ var list_files = args[1];
 delete args
 
 function unitAjustSize(fileSizeInBytes){
-    if (fileSizeInBytes < 1048576) return (fileSizeInBytes / 1024).toFixed(0) + " Kb";
-    else if (fileSizeInBytes < 1073741824) return (fileSizeInBytes / 1048576).toFixed(0) + " Mb";
+    if (fileSizeInBytes < 1048576) return (fileSizeInBytes / 1024).toFixed(0) + " KB";
+    else if (fileSizeInBytes < 1073741824) return (fileSizeInBytes / 1048576).toFixed(0) + " MB";
     else return (fileSizeInBytes / 1073741824).toFixed(0) + " GB";
 }
 
@@ -144,13 +144,13 @@ document.addEventListener('DOMContentLoaded', function() {
     wavesurfer = WaveSurfer.create({
         container: '#waveform',
         waveColor: '#4ACA4E',
-        progressColor: '#072708',
-        height: 120
+        progressColor: '#765FC9',
+        height: 100
     });
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    let naudio = 10;
+    let naudio = 9;
     
     let beg_pos = 0;
     let end_pos;
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let npage = document.getElementsByClassName('npage');
 
     let currentPage = 1;
-    let lastPage = Math.ceil(list_files.length/10)
+    let lastPage = Math.ceil(list_files.length/naudio)
 
     npage[0].innerHTML = currentPage+"/"+lastPage;
     
