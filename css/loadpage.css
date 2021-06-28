@@ -1,0 +1,33 @@
+/* Bootstrap CSS */
+@import url("global.css");   
+
+
+#init, .row, .container{
+    height: 100%;
+}
+
+.col{
+    display: block;
+}
+
+.h1{
+    color: #4ACA4E;
+}
+
+.progress-bar{
+    background-color: #4ACA4E;
+}
+
+.progress{
+    background-color: #765FC9;
+    height: 40px;
+}
+
+.spinner-grow{
+    height: 10pt;
+    width: 10pt;
+}
+
+.text-success{
+    color: #4ACA4E;
+}

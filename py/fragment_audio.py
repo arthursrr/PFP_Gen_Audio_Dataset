@@ -71,7 +71,7 @@ def fragment_spectrogram(audio_dir,
                         fft_length=255, 
                         stride=64, 
                         subtype='PCM_16', 
-                        spec=False):
+                        save_spec=False):
     '''
     Esta função recebe o path da base de audio WAV produz a fragmentação e salva os audio novos num path tambem informado.
     Esse processo sem auxilio de GPU pode levar algum tempo.
@@ -95,13 +95,18 @@ def fragment_spectrogram(audio_dir,
     data_spec = None
     i_patch = 0
 
-    audio_paths = glob(audio_dir+"/**/*.wav") #lista de paths de audios
+    audio_dir = audio_dir.replace('\\', '/')
+    save_dir = save_dir.replace('\\', '/')
 
+    audio_paths = glob(audio_dir+"/*.wav")
+    if len(glob(audio_dir+"/*.wav"))==0:
+        audio_paths = glob(audio_dir+"/**/*.wav") #lista de paths de audios
+    
 
-    spec_dest = save_dir+"/Spectrogramas/"
+    spec_dest = save_dir+"/Espectrogramas/"
     audio_dest = save_dir+"/Audios/"
 
-    if spec:
+    if save_spec:
         if not os.path.exists(spec_dest):
             os.mkdir(spec_dest)
 
@@ -150,7 +155,7 @@ def fragment_spectrogram(audio_dir,
                 i_patch += 1
             data_spec = np.reshape(data_spec, (n_times-(n_times%n_freq), n_freq))
             
-            if spec:
+            if save_spec:
                 np.save(spec_dest+os.path.basename(i).split('.')[0]+'.npy', data_spec)
             
             #transformando spectrograma para onda
@@ -256,3 +261,19 @@ if __name__ == '__main__':
                                            int(sys.argv[10]),
                                            sys.argv[11]
                                            ))
+    else:
+        if sys.argv[12] == 'true':
+            spec = True
+        else:
+            spec = False
+        print(fragment_spectrogram(sys.argv[2], 
+                                   sys.argv[3], 
+                                   int(sys.argv[4]), 
+                                   int(sys.argv[5]), 
+                                   int(sys.argv[6]), 
+                                   int(sys.argv[7]), 
+                                   int(sys.argv[8]), 
+                                   int(sys.argv[9]), 
+                                   int(sys.argv[10]),
+                                   sys.argv[11],
+                                   spec))
