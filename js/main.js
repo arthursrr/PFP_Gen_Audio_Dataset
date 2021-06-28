@@ -5,6 +5,7 @@ const fs = require('fs')
 var path_dir = null;
 var list_files = null;
 var save_dir = null;
+var frag_args = null;
 
 function createWindow () {
   // Cria a janela de navegador.
@@ -15,7 +16,6 @@ function createWindow () {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true
-      //preload: path.join(__dirname, 'preload.js')
     }  
   })
   // carregar o index.html do aplicativo.
@@ -41,8 +41,16 @@ app.on('window-all-closed', function () {
 })
 
 ipcMain.on("toMain", (event, args) => {
-    path_dir = args[0]
-    list_files = args[1]
+  path_dir = args[0]
+  list_files = args[1]
+});
+
+ipcMain.on("argsToMain", (event, args) => {
+  frag_args = args
+});
+
+ipcMain.on("argsfromMain", (event, args) => {
+  event.returnValue = frag_args
 });
 
 ipcMain.on("fromMain", (event, args) => {
@@ -51,7 +59,7 @@ ipcMain.on("fromMain", (event, args) => {
 
 ipcMain.on('show-open-dialog', (event, arg)=> {
   save_dir = dialog.showOpenDialogSync({
-    properties: ['openDirectory'],
+    properties: ['openDirectory']
   });
   event.returnValue = save_dir
 })

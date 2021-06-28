@@ -1,5 +1,4 @@
 const { ipcRenderer} = require('electron')
-const fs = require('fs');
 const $ = jQuery = require('jquery');
 var WaveSurfer = require('wavesurfer.js');
 const colormap = require('colormap');
@@ -19,21 +18,6 @@ var currentTrack = 0;
 
 var wavesurfer;
 var preview_wavesurfer;
-
-function getParam(){
-    audio_dir = ""; 
-    save_dir = ""; 
-    frag_range = "[0.1, 0.7]";
-    rate = 16000; 
-    duration = 30;
-    frame_length = 256; 
-    fft_length = 255; 
-    stride = 64; 
-    subtype ='PCM_16'; 
-    spec = False;
-    return []
-}
-
 
 document.getElementById("btnVoltar").addEventListener("click", function(){ 
     window.location.replace("../html/infopage.html"); 
@@ -258,6 +242,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let avancar = document.getElementById("avancar");
     avancar.addEventListener('click', function(e) {
-        //window.location.replace("../html/loadpage.html");
+
+        let pvw = false;
+        let audio_dir = path_dir;
+        let save_dir = document.getElementById("path").value;
+        let frag_min = document.getElementById("minFrag").value;
+        let frag_max = document.getElementById("maxFrag").value; 
+        let rate = document.getElementById("sampleRate").value; 
+        let duration = document.getElementById("duration").value;
+        let frame_length = document.getElementById("frameSize").value; 
+        let fft_length = document.getElementById("nFFT").value; 
+        let stride = document.getElementById("strides").value; 
+        let subtype = 'PCM_16'; 
+        let spec = document.getElementById("SwitchCheck").checked;
+        
+        if (save_dir != '') {
+            args = [pvw, 
+                    audio_dir, 
+                    save_dir, 
+                    frag_min, 
+                    frag_max, 
+                    rate, 
+                    duration, 
+                    frame_length, 
+                    fft_length, 
+                    stride, 
+                    subtype, 
+                    spec]
+
+            ipcRenderer.send('argsToMain', args);
+            window.location.replace("../html/loadpage.html");
+        }
     });
 });
