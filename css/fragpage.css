@@ -81,3 +81,14 @@
     background-color: #4ACA4E;
     border-color: #4ACA4E;
 }
+.border{
+    border: 5px solid !important;
+}
+
+.border-success{
+    border-color: #4ACA4E !important;
+}
+
+.border-warning{
+    border-color: #FFC107 !important;
+}

@@ -205,8 +205,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    let avancar = document.getElementById("avancar");
     let preview = document.getElementById("preview");
     preview.addEventListener('click', function(e){
+        preview.disabled = true
+        avancar.disabled = true
         preview.innerHTML = '<div class="spinner-grow text-dark" role="status"><span class="visually-hidden">Loading...</span></div>';
         let pvw = true;
         let audio_dir = list_files[currentTrack];
@@ -229,18 +232,23 @@ document.addEventListener('DOMContentLoaded', function() {
         var frag_script_python = new PythonShell('fragment_audio.py', options);
         frag_script_python.on('message', function (message) {
             // received a message sent from the Python script (a simple "print" statement)
-            console.log(message);
             preview.innerHTML = 'Preview'
-            playpause_preview.classList.add('active');
-            playpause_preview.classList.add("pause");
-            preview_wavesurfer.load(path.join(__dirname, '../assets/frag_temp.wav'));
-            playpause_preview.removeAttribute("disabled");
-            slider_preview.removeAttribute("disabled");
+            if (message == "True"){
+                playpause_preview.classList.add('active');
+                playpause_preview.classList.add("pause");
+                preview_wavesurfer.load(path.join(__dirname, '../assets/frag_temp.wav'));
+                playpause_preview.removeAttribute("disabled");
+                slider_preview.removeAttribute("disabled");
+            }else{
+                $("#Error").modal('show');
+            }     
+            preview.disabled = false;
+            avancar.disabled = false;
         });
         
     });
 
-    let avancar = document.getElementById("avancar");
+    
     avancar.addEventListener('click', function(e) {
 
         let pvw = false;

@@ -25,6 +25,9 @@
                               </a>
                             </div>
                         </nav>
+                        <div class="d-flex justify-content-center rounded-pill border border-success">
+                            <p class="h3 m-0">Referência</p>
+                        </div>
                         <div class="d-flex flex-column justify-content-center mt-3 mb-1" id="waveform"></div>
                         <div class="d-flex flex-column justify-content-center mt-3 mb-1" id="wave-spectrogram"></div>
                         <div class="d-flex justify-content-between commands mb-3">
@@ -59,7 +62,9 @@
                             
                         </div>
                         
-                        
+                        <div class="d-flex justify-content-center rounded-pill border border-warning">
+                            <p class="h3 m-0">Preview</p>
+                        </div>
                         <div class="d-flex flex-column justify-content-center mt-3 mb-1" id="preview-waveform">
                             <!-- Preview Wave -->        
                         </div>
@@ -178,15 +183,20 @@
 		</div>
 
 
-        <!-- Vertically centered modal -->
-        <div class="modal fade" id="Progress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-			<div class="modal-content">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <!-- centered modal -->
+        <div class="modal fade" id="Error" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered w-50">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Erro!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                    <div class="modal-body">
+                        Os dados e os parâmetros não correspondem.
+                    </div>
+                    
                 </div>
-			</div>
-			</div>
+            </div>
 		</div> 
 
 		<!-- Arquivos para serem executados neste processo -->

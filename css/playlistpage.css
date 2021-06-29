@@ -1,0 +1,75 @@
+@import url("global.css");   
+
+
+#init, .container{
+    height: 100%;
+}
+
+.col{
+    display: block;
+}
+.destaque{
+    background: rgba(0, 0, 0, 1);
+}
+
+.label{
+    color: white;
+    font-weight: 120;
+}
+
+
+.list-group-item{
+    background-color: #444444;
+    font-family: Geomanist;
+    font-style: normal;
+    color: #4ACA4E;
+}
+
+#duracao{
+    text-align: center;
+}
+
+
+.audio{
+    background-color: #000000;
+}
+
+.list-group-item.active{
+    background-color: #4ACA4E !important;
+    color: #444444 !important;
+}
+
+.h2{
+    font-family: Geomanist;
+    font-style: normal;
+    color: #4ACA4E;
+}
+
+.h3{
+    font-family: Geomanist;
+    font-size: x-large;
+    color: #4ACA4E;
+}
+
+.bg{
+    border-bottom-color:slategray;
+    border-bottom-style: solid;
+}
+
+.btn-success{
+    background-color: #4ACA4E;
+    font-family: Geomanist;
+    font-style: normal;
+}
+
+.border{
+    border: 5px solid !important;
+}
+
+.border-success{
+    border-color: #4ACA4E !important;
+}
+
+.border-warning{
+    border-color: #FFC107 !important;
+}

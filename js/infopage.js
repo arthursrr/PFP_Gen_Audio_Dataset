@@ -45,12 +45,12 @@ async function getDurationTrack(track, id){
 
 
 async function getMetadata(list_files){
-    
     var count = 0;
     var perc = 0;
     var tempTotal = 0;
     var fileSizeInBytes = 0
     var samplerate = 0
+    
     for (const element of list_files) {
         var stats = fs.statSync(element)
         fileSizeInBytes += stats["size"]
@@ -64,11 +64,12 @@ async function getMetadata(list_files){
         perc = parseInt(count/list_files.length*100)
         $('.progress-bar').css('width', perc+'%').attr('aria-valuenow', perc); 
     }
-    $("#Progress").modal("toggle")
+    
     return [tempTotal, fileSizeInBytes, samplerate]
 }
 
 async function chanegValues(){
+    $("#Progress").modal('show');
     let total_args = await getMetadata(list_files);
     let formato = "WAV";
     let quantidade = list_files.length.toString();
@@ -81,6 +82,7 @@ async function chanegValues(){
     $("#tamTotal").text(tamTotal);
     $("#tempMedio").text(tempMedio);
     $("#tempTotal").text(tempTotal);
+    $("#Progress").modal('hide');
 
 }
 
@@ -130,7 +132,6 @@ function player(links){
 var wavesurfer
 
 window.onload = function () {
-    $("#Progress").modal('show');
     chanegValues();
 }
 

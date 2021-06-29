@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval'; img-src 'self' 'unsafe-eval';">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval'; img-src 'self' data:;">
 		<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self';">
 
 		<!-- CSS -->
@@ -100,15 +100,22 @@
 		</div>
 
 
-        <!-- Vertically centered modal -->
+        <!-- centered modal -->
         <div class="modal fade" id="Progress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-			<div class="modal-content">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="modal-dialog modal-dialog-centered w-50">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Carregando informações do diretório</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                    <div class="modal-body">
+                        <div class="progress w-100">
+                            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
                 </div>
-			</div>
-			</div>
+            </div>
 		</div> 
 
 		<!-- Arquivos para serem executados neste processo -->

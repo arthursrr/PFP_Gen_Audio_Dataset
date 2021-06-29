@@ -33,8 +33,9 @@ async function run()
                     reject({ success: false, err });
                 }
                 
-                console.log('PythonShell results:', results);
-
+                if (results[0] == "False") {
+                    $("#Error").modal('show');
+                }
                 resolve({ success: true, results });
               });
         }
@@ -55,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let delay = 1000; // 1 segundo
 
     let avancar = document.getElementById("avancar");
+    let voltar = document.getElementById("voltar");
 
     var iID = setInterval(function(){
                                     if (frag_audio >= list_files.length) {
@@ -76,7 +78,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                     },delay);
 
     avancar.addEventListener('click', function(){
-        window.location.replace("../html/playlistpage.html");
+        glob(dest_files +'/*.wav', {}, (err, files)=>{
+            ipcRenderer.send('destToMain', files);
+            window.location.replace("../html/playlistpage.html");
+        })
+    });
+
+    voltar.addEventListener("click", function(){
+        window.location.replace("../html/fragpage.html");
     });
     
 });

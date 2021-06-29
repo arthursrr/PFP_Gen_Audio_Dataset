@@ -1,0 +1,71 @@
+<!--infopage.html-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval'; img-src 'self' data:;">
+		<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self';">
+
+		<!-- CSS -->
+		<link rel="stylesheet" href="../css/playlistpage.css">
+		
+		<title>Audio Inpainting Dataset Generator</title>
+	</head>
+	<body>
+		<div class="h-100">
+            <div class="container-fluid h-100">
+				<div class="row h-100">
+					<div class="col-6 d-flex flex-column">
+                        <div class="d-flex justify-content-center rounded-pill border border-success">
+                            <p class="h3 m-0">Referência</p>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center mt-3 mb-3" id="waveform"></div> 
+                        <div class="d-flex flex-column justify-content-center mb-3" id="playlist" >
+                            <!-- Audios -->           
+                        </div>                        
+					</div>
+					<div class="col-6 destaque">
+                        <div class="d-flex justify-content-center rounded-pill border border-warning">
+                            <p class="h3 m-0">Fragmentado</p>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center mt-3 mb-3" id="waveform-corte"></div> 
+                        <div class="d-flex flex-column justify-content-center mb-3" id="playlist-corte" >
+                            <!-- Audios Corte-->           
+                        </div>  
+					</div>
+                    
+                        <div class="d-flex justify-content-between mt-auto mb-2">
+                            <div class="d-flex h2 m-0">
+                                Tudo certo?
+                            </div>
+                            <div class="d-flex">
+                                <div class="destaque">
+                                    <button class="btn" type="button" id="prev">
+                                        <img src="../assets/arrow-left.svg" alt="home" width="30" height="24" class="d-inline-block align-text-middle">
+                                    </button>
+                                </div> 
+                                <div class="p-2 destaque label npage"></div> 
+                                <div class="destaque">
+                                    <button class="btn" type="button" id="next">
+                                        <img src="../assets/arrow-right.svg" alt="home" width="30" height="24" class="d-inline-block align-text-middle">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="d-flex h2 m-0">
+                                <button class="btn btn-success btn-lg btn-block" id="avancar" type="button">Começar de novo</button>
+                            </div>                      
+                        </div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- Arquivos para serem executados neste processo -->
+		<script src="../js/playlistpage.js"></script>
+		
+		<!--Bootstrap JS -->
+		<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	</body>
+</html>

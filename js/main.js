@@ -4,6 +4,7 @@ const fs = require('fs')
 
 var path_dir = null;
 var list_files = null;
+var list_generated_files = null;
 var save_dir = null;
 var frag_args = null;
 
@@ -20,7 +21,7 @@ function createWindow () {
   })
   // carregar o index.html do aplicativo.
   mainWindow.loadFile('./html/home.html')
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 }
 
 // Este método sera chamado quando o Electron tiver terminado
@@ -45,6 +46,10 @@ ipcMain.on("toMain", (event, args) => {
   list_files = args[1]
 });
 
+ipcMain.on("destToMain", (event, args) => {
+  list_generated_files = args;
+});
+
 ipcMain.on("argsToMain", (event, args) => {
   frag_args = args
 });
@@ -55,6 +60,10 @@ ipcMain.on("argsfromMain", (event, args) => {
 
 ipcMain.on("fromMain", (event, args) => {
   event.returnValue = [path_dir, list_files]
+});
+
+ipcMain.on("destTofromMain", (event, args) => {
+  event.returnValue = list_generated_files
 });
 
 ipcMain.on('show-open-dialog', (event, arg)=> {
