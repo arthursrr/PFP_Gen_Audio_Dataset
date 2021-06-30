@@ -1,4 +1,10 @@
-@import url("global.css");
+/*Autor: Arthur Serra*/
+/*  ========================== infopage.css ================================
+ *  A configurações de elementos desse arquivo se propaga apenas para infopage.html
+ *  ========================================================================
+*/
+
+@import url("global.css"); /*Importa das configurações do aquivo global*/
 
 .destaque{
     background: rgba(0, 0, 0, 1);

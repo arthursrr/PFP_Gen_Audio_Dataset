@@ -1,9 +1,11 @@
-<!--index.html-->
+<!--Autor: Arthur Serra-->
+<!--home.html-->
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Pemissões de importação do electron.js -->
 		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval';">
 		<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self';">
 
@@ -22,33 +24,30 @@
 					<div class="col card text-center"> 
 						<img src="../assets/copy.svg" class="col-1 mx-auto d-block" alt="drag&drop">
 						<p class="col-6 card-text">Arraste o diretório de áudios até aqui.</p>
-						
+					</div>
+				</div>
+			</div>
+		</div>
+  
+		<!-- Modal -->
+		<div class="modal fade" id="notDir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="notDirLabel">Alerta</h5>
+					</div>
+					<div class="modal-body">
+						Caminho informado não é um diretório.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
-  
-		<!-- Modal -->
-		<div class="modal fade" id="notDir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-				<h5 class="modal-title" id="notDirLabel">Alerta</h5>
-				</div>
-				<div class="modal-body">
-				Caminho informado não é um diretório.
-				</div>
-				<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-				</div>
-			</div>
-			</div>
-		</div>
-
 		<!-- Arquivos para serem executados neste processo -->
 		<script src="../js/home.js"></script>
-		
 		<!--Bootstrap JS -->
 		<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	</body>

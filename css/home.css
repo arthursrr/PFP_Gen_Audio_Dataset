@@ -1,5 +1,10 @@
-/* Bootstrap CSS */
-@import url("global.css");   
+/*Autor: Arthur Serra*/
+/*  ========================== home.css ================================
+ *  A configurações de elementos desse arquivo se propaga apenas para home.html
+ *  ======================================================================
+*/
+
+@import url("global.css"); /*Importa das configurações do aquivo global*/
 
 
 #init, .row, .container{

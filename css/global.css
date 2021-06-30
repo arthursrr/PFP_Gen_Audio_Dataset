@@ -1,14 +1,19 @@
-@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
+/*Autor: Arthur Serra*/
+/*  ========================== global.css ================================
+ *  A configurações de elementos desse arquivo se propaga para todos os .css
+ *  ======================================================================
+*/
+
+/*Importa todas classes do framework bootstrap 5.0*/
+@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css"); 
 
 html, body{
-    height: 100%;
+    height: 100%; 
 }
-
 
 body{
     background-color: #181818;
 }
-
 
 h1, h2{
     font-family: Geomanist;

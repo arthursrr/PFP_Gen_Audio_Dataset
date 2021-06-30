@@ -1,5 +1,10 @@
-@import url("global.css");   
+/*Autor: Arthur Serra*/
+/*  ========================== playlistpage.css ================================
+ *  A configurações de elementos desse arquivo se propaga apenas para playlistpage.html
+ *  ========================================================================
+*/
 
+@import url("global.css"); /*Importa das configurações do aquivo global*/
 
 #init, .container{
     height: 100%;

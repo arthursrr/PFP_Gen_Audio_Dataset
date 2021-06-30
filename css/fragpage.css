@@ -1,4 +1,10 @@
-@import url("global.css");
+/*Autor: Arthur Serra*/
+/*  ========================== fragpage.css ================================
+ *  A configurações de elementos desse arquivo se propaga apenas para fragpage.html
+ *  ========================================================================
+*/
+
+@import url("global.css"); /*Importa das configurações do aquivo global*/
 
 .destaque{
     background: rgba(0, 0, 0, 1);
@@ -75,7 +81,6 @@
     background-color: #181818;
     font-weight: bold;
 }
-
 
 .form-check-input:checked{
     background-color: #4ACA4E;

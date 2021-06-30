@@ -1,91 +1,106 @@
-const{ ipcRenderer } = require('electron');
-var $ = jQuery = require('jquery');
-var path = require('path');
-const glob = require('glob').Glob;
-const {PythonShell} = require('python-shell');
-const fs = require('fs');
+//Autor: Arthur Serra
+/*  ========================== Loadpage.js ================================
+ *  Este script nada mais é que uma barra de progesso do processo de fragmentação
+ *  ===================================================================
+*/
+const{ ipcRenderer } = require('electron');     //Importa função de comunicação com o processo principal
+var $ = jQuery = require('jquery');             //Importa comandos JQuery
+var path = require('path');                     //Importa sistema de arquivos
+const glob = require('glob').Glob;              //Importa sistema de arquivos
+const fs = require('fs');                       //Importa sistema de arquivos
+const {PythonShell} = require('python-shell');  //Importa biblioteca de integração com script Python
 
-var args = ipcRenderer.sendSync('fromMain', "");
-var path_dir = args[0];
-var list_files = args[1];
+var args = ipcRenderer.sendSync('fromMain', ""); //[Array] faz uma chamada ao evento do processo principal para obter o diretorio geral e sua lista de arquivos  
+var path_dir = args[0];                          //[String] caminho do diretorio geral
+var list_files = args[1];                        //[Array] caminho de todos os arquivos do diretorio princial
 delete args
 
+var frag_args = ipcRenderer.sendSync('argsfromMain', "");   //[Array] faz uma chamada ao evento do processo principal para obter os parametros de fragmentação  
+var dest_files = frag_args[2]+'/Audios'                     //[String] Complemento do diretorio de armazenamento dos audio fragmentados
 
-var frag_args = ipcRenderer.sendSync('argsfromMain', "");
-
-
-var dest_files = frag_args[2]+'/Audios'
-
-
-async function run()
-{
+async function run(){
+    /* Esta função recebe executa o processo de fragmentação python de forma assincrona
+     * <ATRIBUTOS>
+     *      [null]   
+     * <RETORNO>
+     *      [null]
+    */
     const { success, err = '', results } = await new Promise(
-        (resolve, reject) =>
-        {
+        (resolve, reject) =>{
+            //gera promessa de resolução
+
+            //Dicionario de argumentos para execução do script Python 
             let options = {
-                scriptPath: path.join(__dirname, '../py/'),
-                args: frag_args
+                scriptPath: path.join(__dirname, '../py/'),     //[String] caminho do diretorio de armazenamento do script
+                args: frag_args                                 //[Array] argumento de execução
             };
             
             PythonShell.run('fragment_audio.py', options, function (err, results) {
-                if (err)
-                {
+                if (err){
+                    //Caso um erro seja gerado na chamada
                     reject({ success: false, err });
                 }
-                
                 if (results[0] == "False") {
-                    $("#Error").modal('show');
+                    //Caso um erro tenha ocorrido na execução do script
+                    $("#Error").modal('show');      //Ativa modal de erro via JQuery
                 }
                 resolve({ success: true, results });
               });
         }
     );
-
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-
+    //Quando o documento for carregado
     run();
 
-    var frag_audio = 0;
-    var perc = 0;
-    let aux_perc = perc;
+    //CONTADORES AUXILIARES
+    var frag_audio = 0;                                 //[Inteiro] Quantidade de audios processados
+    var perc = 0;                                       //[Inteiro] Percentual de audios processados
+    let aux_perc = perc;                                
 
-    let att_perc = document.getElementById("perc");
+    let att_perc = document.getElementById("perc");     //Elemento com o valor da porcentagem de audio processado 
 
-    let delay = 1000; // 1 segundo
+    let delay = 1000; // 1 segundo                      //[Inteiro] Define o delay em milissegundos do processo de atualização de progresso
 
-    let avancar = document.getElementById("avancar");
-    let voltar = document.getElementById("voltar");
+    let avancar = document.getElementById("avancar");   //Elemento do botao de avanço
+    let voltar = document.getElementById("voltar");     //Elemento do botao de voltar
 
     var iID = setInterval(function(){
+                                    /*A cada intervalo de 1 segundo esta função é executada
+                                    */
                                     if (frag_audio >= list_files.length) {
-                                        avancar.disabled = false;
-                                        clearInterval(iID);
+                                        //Caso o botao a quantidade de audio processados seja igual a quantidade de arquivos enviados
+                                        avancar.disabled = false;   //Habilita o botal de avanço
+                                        clearInterval(iID);         //Encerra o loop de checagem
                                     }else{
+                                        //Valida a existencia do arquivo de destino
                                         if (fs.existsSync(dest_files)) {
-                                            let files = fs.readdirSync(dest_files);
-                                            frag_audio = files.length;
-                                            perc = parseInt(frag_audio/list_files.length*100)
+                                            let files = fs.readdirSync(dest_files);             //[Array] caminhos dos arquivos processados 
+                                            frag_audio = files.length;                          //[Inteiro] quantidade de arquivos processados 
+                                            perc = parseInt(frag_audio/list_files.length*100)   //[Inteiro] percentual de arquivos processados
                                              
                                             if (aux_perc < perc){
-                                                att_perc.innerHTML = perc+"%"
-                                                $('.progress-bar').css('width', perc+'%').attr('aria-valuenow', perc);
+                                                //Condição para evitar escrita de valores repetido no formulario HTML
+                                                att_perc.innerHTML = perc+"%"                                           //Atualiza o valor do percentual no formulario
+                                                $('.progress-bar').css('width', perc+'%').attr('aria-valuenow', perc);  //Atualiza a barra de progresso via JQuery
                                                 aux_perc = perc;
                                             }
                                         }
                                     }
-                                    },delay);
+                },delay);
 
     avancar.addEventListener('click', function(){
+        //Evento ativado ao clicar no botao avançar
         glob(dest_files +'/*.wav', {}, (err, files)=>{
-            ipcRenderer.send('destToMain', files);
-            window.location.replace("../html/playlistpage.html");
+            ipcRenderer.send('destToMain', files);                  //Envia ao script principal a lista de arquivos processados
+            window.location.replace("../html/playlistpage.html");   //Redireciona a pagina para playlistpage.html
         })
     });
 
     voltar.addEventListener("click", function(){
-        window.location.replace("../html/fragpage.html");
+        //Evento ativado ao clicar no botao voltar
+        window.location.replace("../html/fragpage.html");           //Redireciona a pagina para fragpage.html
     });
     
 });
