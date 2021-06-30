@@ -1,8 +1,9 @@
-from glob import glob
-import os, sys
-import numpy as np
-import soundfile as sf
-import tensorflow as tf
+'''Autor: Arthur Serra'''
+from glob import glob       #Sistema de aquivos
+import os, sys              #Chamadas de sistema
+import numpy as np          #Biblioteca numerica
+import tensorflow as tf     #Biblioteca de tensores
+import soundfile as sf      #Biblioteca de gerenciamento de arquivos de audio
 
 def audio_to_spectrogram(path, rate=16000, duration = 30, frame_length=256, fft_length=255, stride=64, fmin=0, fmax=8000):
     """
