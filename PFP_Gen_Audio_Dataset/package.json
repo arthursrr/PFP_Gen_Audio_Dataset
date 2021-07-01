@@ -4,7 +4,8 @@
   "description": "\"Gerador e visualizador de datasets para a tarefa de audio inpainting\"",
   "main": "js/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,8 @@
   },
   "homepage": "https://github.com/arthursrr/PFP_Gen_Audio_Dataset#readme",
   "devDependencies": {
-    "electron": "^13.0.1"
+    "electron": "^13.0.1",
+    "spectron": "^15.0.0"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
@@ -31,6 +33,7 @@
     "colormap": "^2.3.2",
     "electron-store": "^8.0.0",
     "glob": "^7.1.7",
+    "jest": "^27.0.6",
     "jquery": "^3.6.0",
     "music-metadata": "^7.8.6",
     "python-shell": "^3.0.0",

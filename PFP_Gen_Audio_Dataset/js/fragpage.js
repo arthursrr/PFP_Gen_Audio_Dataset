@@ -1,15 +1,15 @@
 //Autor: Arthur Serra
 /*  ========================== fragpage.js ================================
  *  Este script produz todos os eventos de controle da pagina fragpage.html
- *  Tendo como principal evento definir e pre-visualizar paramentros de fragmentação
+ *  Tendo como principal evento definir e pre-visualizar paramentros de fragmentacao
  *  ===================================================================
 */
 
-const { ipcRenderer} = require('electron')      //Importa função de comunicação com o processo principal
+const { ipcRenderer} = require('electron')      //Importa funcao de comunicacao com o processo principal
 const $ = jQuery = require('jquery');           //Importa comandos JQuery
-var WaveSurfer = require('wavesurfer.js');      //Importa biblioteca de visualização de ondas e espectro
+var WaveSurfer = require('wavesurfer.js');      //Importa biblioteca de visualizacao de ondas e espectro
 const colormap = require('colormap');           //Importa biblioteca de mapa de cores para o espectrograma
-const {PythonShell} = require('python-shell');  //Importa biblioteca de integração com script Python
+const {PythonShell} = require('python-shell');  //Importa biblioteca de integracao com script Python
 var path = require('path');                     //Importa sistema de arquivos
 
 var args = ipcRenderer.sendSync('fromMain', ""); //[Array] faz uma chamada ao evento do processo principal para obter o diretorio geral e sua lista de arquivos  
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
             format: 'float'
             });;
 
-    //instacia o objeto de vizualização de referencia
+    //instacia o objeto de vizualizacao de referencia
     wavesurfer = new WaveSurfer.create({
             container: '#waveform',
             waveColor: '#4ACA4E',
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ]
         });
     
-    //instacia o objeto de vizualização cortado
+    //instacia o objeto de vizualizacao cortado
     preview_wavesurfer = new WaveSurfer.create({
             container: '#preview-waveform',
             waveColor: '#4ACA4E',
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
 
-    let skip_prev = document.getElementById("skip_prev")    //Elemento para avançar faixa de referencia
+    let skip_prev = document.getElementById("skip_prev")    //Elemento para avancar faixa de referencia
     skip_prev.addEventListener('click', function(e) {
         if (currentTrack > 0 ) {
             //Caso nao seja a primeira faixa 
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             wavesurfer.load(list_files[currentTrack]); 
 
-            //Reseta o status e desabilita o preview até q seja carregado novamente
+            //Reseta o status e desabilita o preview ate q seja carregado novamente
             playpause_preview.classList.remove('active');
             playpause_preview.classList.remove("pause");
             preview_wavesurfer.pause();
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }          
             wavesurfer.load(list_files[currentTrack]); 
 
-            //Reseta o status e desabilita o preview até q seja carregado novamente
+            //Reseta o status e desabilita o preview ate q seja carregado novamente
             playpause_preview.classList.remove('active');
             playpause_preview.classList.remove("pause");
             preview_wavesurfer.pause();
@@ -220,59 +220,59 @@ document.addEventListener('DOMContentLoaded', function() {
     let save_dir = document.getElementById("saveDir");
     let label_dir = document.getElementById("path");
     save_dir.addEventListener('click', function(e){
-        let value = ipcRenderer.sendSync('show-open-dialog', "");   //[String] Faz uma requisição ao script principal
+        let value = ipcRenderer.sendSync('show-open-dialog', "");   //[String] Faz uma requisicao ao script principal
         if (value != undefined) {
             //Caso algum diretorio tenha sido corretamente selecionado
             label_dir.value = value;
         }
     });
 
-    let avancar = document.getElementById("avancar");       //Elemento para avançar para a proxima pagina
-    let preview = document.getElementById("preview");       //Elemento para carregar uma amostra de fragmentação
+    let avancar = document.getElementById("avancar");       //Elemento para avancar para a proxima pagina
+    let preview = document.getElementById("preview");       //Elemento para carregar uma amostra de fragmentacao
     preview.addEventListener('click', function(e){
         //Ao clicar no elemento preview
         preview.disabled = true                             //Desabilita o botao de preview                     
-        avancar.disabled = true                             //Desabilita o botao de de avançar
+        avancar.disabled = true                             //Desabilita o botao de de avancar
         //Adiciona icone de carregamento
         preview.innerHTML = '<div class="spinner-grow text-dark" role="status"><span class="visually-hidden">Loading...</span></div>';
         let pvw = true;                                                 //[Boolean] Flag de preview
         let audio_dir = list_files[currentTrack];                       //[String]  Caminho do diretorio de referencia
         let temp_dir = path.join(__dirname, '../assets/');              //[String]  Caminho do audio preview temporario
-        let frag_min = document.getElementById("minFrag").value;        //[Inteiro] Limite minimo de fragmentação para cada parte do epectro
-        let frag_max = document.getElementById("maxFrag").value;        //[Inteiro] Limite maximo de fragmentação para cada parte do epectro
+        let frag_min = document.getElementById("minFrag").value;        //[Inteiro] Limite minimo de fragmentacao para cada parte do epectro
+        let frag_max = document.getElementById("maxFrag").value;        //[Inteiro] Limite maximo de fragmentacao para cada parte do epectro
         let rate = document.getElementById("sampleRate").value;         //[Inteiro] Taxa de amostragem geral
-        let duration = document.getElementById("duration").value;       //[Inteiro] Duração geral em segundos
+        let duration = document.getElementById("duration").value;       //[Inteiro] Duracao geral em segundos
         let frame_length = document.getElementById("frameSize").value;  //[Inteiro] Tamanho da janela deslizante da transformada de fourier
         let fft_length = document.getElementById("nFFT").value;         //[Inteiro] Tamanho das transformadas (A metade deste valor define a quantidade de frequencias)
         let stride = document.getElementById("strides").value;          //[Inteiro] Tamanho dos passos de janelamento
-        let subtype = 'PCM_16';                                         //[String]  Formato de condificação do audio resultante
+        let subtype = 'PCM_16';                                         //[String]  Formato de condificacao do audio resultante
         let spec = false;                                               //[Boolean] Flag para definir se os espectrogramas tambem serao salvos
 
-        //Dicionario de argumentos para execução do script Python
+        //Dicionario de argumentos para execucao do script Python
         let options = {
             scriptPath: path.join(__dirname, '../py/'),                                                                             //[String] caminho do diretorio de armazenamento do script
-            args: [pvw, audio_dir, temp_dir, frag_min, frag_max, rate, duration, frame_length, fft_length, stride, subtype, spec]   //[Array] argumento de execução
+            args: [pvw, audio_dir, temp_dir, frag_min, frag_max, rate, duration, frame_length, fft_length, stride, subtype, spec]   //[Array] argumento de execucao
         };
         
 
-        var frag_script_python = new PythonShell('fragment_audio.py', options); //[Objeto] Instancia de execução do script python
+        var frag_script_python = new PythonShell('fragment_audio.py', options); //[Objeto] Instancia de execucao do script python
         frag_script_python.on('message', function (message) {
-            //Evento inicia a execução do script python e aguardo um retorno atraves do argumento message
-            //Os comando subsequentes são executados ao fim do processo python. 
+            //Evento inicia a execucao do script python e aguardo um retorno atraves do argumento message
+            //Os comando subsequentes sao executados ao fim do processo python. 
             preview.innerHTML = 'Preview'
             if (message == "True"){
-                //Caso o fim do processo resulte em 'True', nao houve problema na execução
+                //Caso o fim do processo resulte em 'True', nao houve problema na execucao
                 playpause_preview.classList.add('active');
                 playpause_preview.classList.add("pause");
                 preview_wavesurfer.load(path.join(__dirname, '../assets/frag_temp.wav'));   //Carrega o arquivo temporario resultante
-                playpause_preview.removeAttribute("disabled");                              //Habilita o botão de play/pause da seção preview
-                slider_preview.removeAttribute("disabled");                                 //Habilita o botão sliders do seção preview
+                playpause_preview.removeAttribute("disabled");                              //Habilita o botao de play/pause da secao preview
+                slider_preview.removeAttribute("disabled");                                 //Habilita o botao sliders do secao preview
             }else{
                 //Caso o script python nao tem sido executado corretamente
                 $("#Error").modal('show');                                                  //Chamada do elemento modal de erro via JQuery
             }     
             preview.disabled = false;   //Habilita o botao de preview
-            avancar.disabled = false;   //Habilita o botao de avanço
+            avancar.disabled = false;   //Habilita o botao de avanco
         });
         
     });
@@ -282,15 +282,15 @@ document.addEventListener('DOMContentLoaded', function() {
         let pvw = false;                                                 //[Boolean] Flag de preview
         let audio_dir = path_dir;                                        //[String]  Caminho do diretorio de referencia
         let save_dir = document.getElementById("path").value;            //[String]  Caminho do audio preview temporario
-        let frag_min = document.getElementById("minFrag").value;         //[Inteiro] Limite minimo de fragmentação para cada parte do epectro
-        let frag_max = document.getElementById("maxFrag").value;         //[Inteiro] Limite maximo de fragmentação para cada parte do epectro
+        let frag_min = document.getElementById("minFrag").value;         //[Inteiro] Limite minimo de fragmentacao para cada parte do epectro
+        let frag_max = document.getElementById("maxFrag").value;         //[Inteiro] Limite maximo de fragmentacao para cada parte do epectro
         let rate = document.getElementById("sampleRate").value;          //[Inteiro] Taxa de amostragem geral
-        let duration = document.getElementById("duration").value;        //[Inteiro] Duração geral em segundos
+        let duration = document.getElementById("duration").value;        //[Inteiro] Duracao geral em segundos
         let frame_length = document.getElementById("frameSize").value;   //[Inteiro] Tamanho da janela deslizante da transformada de fourier
         let fft_length = document.getElementById("nFFT").value;          //[Inteiro] Tamanho das transformadas (A metade deste valor define a quantidade de frequencias)
         let stride = document.getElementById("strides").value;           //[Inteiro] Tamanho dos passos de janelamento
-        let subtype = 'PCM_16';                                          //[String]  Formato de condificação do audio resultante
-        let spec = document.getElementById("SwitchCheck").checked;       //[String]  Formato de condificação do audio resultante
+        let subtype = 'PCM_16';                                          //[String]  Formato de condificacao do audio resultante
+        let spec = document.getElementById("SwitchCheck").checked;       //[String]  Formato de condificacao do audio resultante
         
         if (save_dir != '') {
             //Caso o diretorio de destino seja um diretorio valido
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     spec]
 
             ipcRenderer.send('argsToMain', args);               //Envia o array de argumentos para o script principal
-            window.location.replace("../html/loadpage.html");   //Avança para a proxima pagina (loadpage.html)
+            window.location.replace("../html/loadpage.html");   //Avanca para a proxima pagina (loadpage.html)
         }
     });
 });

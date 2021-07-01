@@ -1,4 +1,8 @@
 '''Autor: Arthur Serra'''
+''' Este script descreve funcoes de transformacao e fragmentacao de audios 
+    atraves da biblioteca TensorFlow, com suporte para GPUs. A execucao desse
+    script depende de uma sequencia de argumentos passado ao executa-lo.
+'''
 from glob import glob       #Sistema de aquivos
 import os, sys              #Chamadas de sistema
 import numpy as np          #Biblioteca numerica
@@ -89,7 +93,7 @@ def fragment_spectrogram(audio_dir,
         stride: Tamanho dos saltos
         spec: Dados sarão salvos na forma de espetrongrama (.npy)
     [RETUNR]
-        tensor format: waveform
+        [Boolean]: Sucesso do processo
     '''
     
     cortes = [] #lista de proporcao de cortes
@@ -193,7 +197,7 @@ def Preview_fragment_spectrogram(audio_path,
             fft_length: Tamanho do FFT para cada janela 
             stride: Tamanho dos saltos
         [RETUNR]
-            boolean
+            [Boolean]: Sucesso do processo
     '''
     try:
         cortes = [] #lista de proporcao de cortes
