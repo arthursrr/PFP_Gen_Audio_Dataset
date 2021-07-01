@@ -1,6 +1,6 @@
 # PFP_Gen_Audio_Dataset
 Gerador e visualizador de datasets para a tarefa de audio inpainting
-'''
+```
     PFP_Gen_Audio_Dataset/
     |----PFP_Gen_Audio_Dataset/
     |	|----assets/
@@ -44,4 +44,4 @@ Gerador e visualizador de datasets para a tarefa de audio inpainting
     |
     |----.gitignore
     |----README.md
-'''
+```
